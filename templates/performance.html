@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Performance Metrics</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #333333;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 0;
+            color: #ffffff;
+        }
+        .title {
+            color: blue; /* Set the desired color value */
+        }
+
+
+        .metrics-container {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .insights-container {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: justify;
+        }
+
+        .dropdown {
+            margin-bottom: 20px;
+        }
+
+        .dropdown select {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .insights-content {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .insights-content.active {
+            display: block;
+        }
+
+        .insights-text {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+    <script>
+        function changeInsight() {
+            var select = document.getElementById("insights-dropdown");
+            var selectedValue = select.value;
+            var insightsContents = document.getElementsByClassName("insights-content");
+            for (var i = 0; i < insightsContents.length; i++) {
+                insightsContents[i].classList.remove("active");
+            }
+            document.getElementById(selectedValue).classList.add("active");
+        }
+    </script>
+</head>
+<body>
+    <h1>Performance Metrics</h1>
+    <div class="metrics-container">
+        <h2 class="metric-label">Train RMSE:</h2>
+        <p class="metric-value">{{ train_rmse }}</p>
+        <h2 class="metric-label">Test RMSE:</h2>
+        <p class="metric-value">{{ test_rmse }}</p>
+    </div>
+    <div class="insights-container">
+        <div class="dropdown">
+            <select id="insights-dropdown" onchange="changeInsight()">
+                <option value="insights-tab1-content" selected>Insight 1</option>
+                <option value="insights-tab2-content">Insight 2</option>
+                <option value="insights-tab3-content">Insight 3</option>
+            </select>
+        </div>
+        <div id="insights-tab1-content" class="insights-content active">
+            <p class="insights-text">The Root Mean Square Error (RMSE) is a measure of the prediction error in a regression model. It quantifies the average difference between the predicted values and the actual values. In the context of Apple stock prediction, the lower RMSE for the test set compared to the training set indicates that the model's performance is better on unseen data.</p>
+        </div>
+        <div id="insights-tab2-content" class="insights-content">
+            <p class="insights-text">This difference can be attributed to the model's ability to generalize well to new data. During training, the model learns from the historical stock price data, capturing patterns and relationships. However, during testing, the model is evaluated on unseen data, simulating real-world scenarios where it needs to make predictions on future stock prices.</p>
+        </div>
+        <div id="insights-tab3-content" class="insights-content">
+            <p class="insights-text">The lower test RMSE suggests that the model has successfully learned the underlying patterns in the data and can make accurate predictions on unseen instances. It indicates that the model has captured the essential trends and dependencies in the Apple stock prices, allowing it to generalize well to new market conditions.</p>
+        </div>
+    </div>
+    <a href="/">Back to Homepage</a>
+
+</body>
+</html>
